@@ -1,0 +1,108 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Patient {
+    private String name;
+    private int age;
+    private String gender;
+    private String contactNumber;
+    private String medicalHistory;
+
+    public Patient(String name, int age, String gender, String contactNumber, String medicalHistory) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.contactNumber = contactNumber;
+        this.medicalHistory = medicalHistory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\nAge: " + age + "\nGender: " + gender + "\nContact Number: " + contactNumber +
+               "\nMedical History: " + medicalHistory + "\n";
+    }
+}
+
+public class MedicalSoftwareApp {
+    private static List<Patient> patientDatabase = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("Medical Software Menu:");
+            System.out.println("1. Add Patient");
+            System.out.println("2. View Patients");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    addPatient();
+                    break;
+                case 2:
+                    viewPatients();
+                    break;
+                case 3:
+                    System.out.println("Exiting the program.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void addPatient() {
+        System.out.print("Enter patient name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter patient age: ");
+        int age = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter patient gender: ");
+        String gender = scanner.nextLine();
+
+        System.out.print("Enter patient contact number: ");
+        String contactNumber = scanner.nextLine();
+
+        System.out.print("Enter patient medical history: ");
+        String medicalHistory = scanner.nextLine();
+
+        Patient patient = new Patient(name, age, gender, contactNumber, medicalHistory);
+        patientDatabase.add(patient);
+
+        System.out.println("Patient added successfully.\n");
+    }
+
+    private static void viewPatients() {
+        System.out.println("\nPatient List:");
+        for (Patient patient : patientDatabase) {
+            System.out.println(patient);
+        }
+    }
+}
